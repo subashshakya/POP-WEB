@@ -74,6 +74,7 @@ class Blogs(models.Model):
 
 class Subscription(models.Model):
     email = models.EmailField(blank=False)
+    created_at = models.DateTimeField(auto_now=True)
 
 
 class Demo(models.Model):
