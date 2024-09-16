@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pop",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -87,6 +88,13 @@ DATABASES = {
         "HOST": os.getenv("DB_HOST_ADDRESS"),
         "PORT": os.getenv("DB_PORT"),
     }
+}
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ]
 }
 
 
