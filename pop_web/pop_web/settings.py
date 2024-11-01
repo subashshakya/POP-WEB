@@ -83,14 +83,13 @@ WSGI_APPLICATION = "pop_web.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DATABASE_NAME"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST_ADDRESS"),
-        "PORT": os.getenv("DB_PORT"),
+        "NAME": os.environ.get("DATABASE_NAME"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST_ADDRESS"),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
-
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
