@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from django.contrib.auth import login, logout
+from django.contrib.auth import login
 from rest_framework.response import Response
 from utils.pagination_defination import Pagination
 from serializers.serializers import UserSerializers
