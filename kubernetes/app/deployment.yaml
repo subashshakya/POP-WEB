@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pop_web
+spec:
+  selector:
+    matchLabels:
+      app: pop_web_be
+  template:
+    metadata:
+      labels:
+        app: pop_web_be
+    spec:
+      containers:
+      - name: pop_web_cont
+        image: pop_web_be
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000

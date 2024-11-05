@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: StatefulSet
+metadata:
+  name: pg_stateful_set
+spec:
+  selector:
+    matchLabels:
+      app: st_pg_db
+  serviceName: postgres_db_service
+  replicas: 2
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Delete
+  template:
+    metadata:
+      labels:
+        app: st_pg_db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16.3
+        ports:
+        - containerPort: 5432
+          name: db
+        volumeMounts:
+        - name: pg_data
+          mountPath: /usr/share/postgres/data
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - metadata:
+      name: pg_data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
