@@ -2,7 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pop_web
+  namespace: POP
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: pop_web_be
@@ -20,3 +22,29 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3000
+        env:
+        - name: DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres_secrets
+              key: PG_DATABASE
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres_secrets
+              key: PG_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres_secrets
+              key: PG_PASS
+        - name: DB_HOST_ADDRESS
+          valueFrom:
+            secretKeyRef:
+              name: postgres_secrets
+              key: HOST
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: postgres_secrets
+              key: PG_PORT
